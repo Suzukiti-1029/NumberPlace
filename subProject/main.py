@@ -5,6 +5,11 @@ root.title('2✕2マスの生成')
 cvs = tk.Canvas(width=360, height=360, bg='white')
 cvs.pack()
 
+def patch_txt(p, q, txt):
+  label = tk.Label(root, text=txt, font=('System', 56))
+  label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
+  grid[q][p] = txt
+
 grid = [[0 for j in range(4)] for i in range(4)]
 
 for y in range(4):
