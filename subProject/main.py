@@ -1,4 +1,5 @@
 import tkinter as tk
+import random as rd
 
 root = tk.Tk()
 root.title('2✕2マスの生成')
@@ -24,5 +25,12 @@ for y in range(2):
         20 + x * 160, 20 + y * 160, 20 + x * 160 + 160, 20 + y * 160 + 160,
         width=3
     )
+
+number_list = [i for i in range(1, 5)]
+
+for y in range(2):
+  for x in range(2):
+    if grid[y][x] == 0:
+      patch_txt(x, y, number_list.pop(rd.randint(0, len(number_list)-1)))
 
 root.mainloop()
