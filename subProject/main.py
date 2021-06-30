@@ -82,13 +82,23 @@ while judge:
     else:
       patch_txt(x, y, number_list3.pop(rd.randint(0, len(number_list3)-1)))
 
+  number_list4 = [i for i in range(1, 5)]
+  for y in range(2, 4):
+    for x in range(2, 4):
+      patch_txt(x, y, number_list4.pop(rd.randint(0, len(number_list4)-1)))
+
   if block22_num_checker(0, 0) \
-  and side14_num_checker(0, 0) \
-  and vertical41_num_checker(0, 0) \
-  and side14_num_checker(0, 1) \
-  and vertical41_num_checker(1, 0) \
   and block22_num_checker(2, 0) \
-  and block22_num_checker(0, 2):
+  and block22_num_checker(0, 2) \
+  and block22_num_checker(2, 2) \
+  and side14_num_checker(0, 0) \
+  and side14_num_checker(0, 1) \
+  and side14_num_checker(0, 2) \
+  and side14_num_checker(0, 3) \
+  and vertical41_num_checker(0, 0) \
+  and vertical41_num_checker(1, 0) \
+  and vertical41_num_checker(2, 0) \
+  and vertical41_num_checker(3, 0):
     judge = False
     print(try_count)
   else:
