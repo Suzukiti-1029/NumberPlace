@@ -26,11 +26,24 @@ for y in range(2):
         width=3
     )
 
+def block22_num_checker(NW_x_index, NW_y_index):
+  if grid[NW_y_index][NW_x_index] != grid[NW_y_index][NW_x_index + 1] \
+  and grid[NW_y_index][NW_x_index] != grid[NW_y_index + 1][NW_x_index] \
+  and grid[NW_y_index][NW_x_index] != grid[NW_y_index + 1][NW_x_index + 1] \
+  and grid[NW_y_index][NW_x_index + 1] != grid[NW_y_index + 1][NW_x_index] \
+  and grid[NW_y_index][NW_x_index + 1] != grid[NW_y_index + 1][NW_x_index + 1] \
+  and grid[NW_y_index + 1][NW_x_index] != grid[NW_y_index + 1][NW_x_index + 1]:
+    return True
+  else:
+    return False
+
 number_list = [i for i in range(1, 5)]
 
 for y in range(2):
   for x in range(2):
     if grid[y][x] == 0:
       patch_txt(x, y, number_list.pop(rd.randint(0, len(number_list)-1)))
+
+print(block22_num_checker(0, 0))
 
 root.mainloop()
