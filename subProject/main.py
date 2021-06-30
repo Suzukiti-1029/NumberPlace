@@ -76,9 +76,19 @@ while judge:
     else:
       patch_txt(x, y, number_list3.pop(rd.randint(0, len(number_list3)-1)))
 
+  for [y, x] in [[1, 2], [1, 3], [2, 1], [3, 1]]:
+    if y == 1:
+      patch_txt(x, y, number_list2.pop(rd.randint(0, len(number_list2)-1)))
+    else:
+      patch_txt(x, y, number_list3.pop(rd.randint(0, len(number_list3)-1)))
+
   if block22_num_checker(0, 0) \
   and side14_num_checker(0, 0) \
-  and vertical41_num_checker(0, 0):
+  and vertical41_num_checker(0, 0) \
+  and side14_num_checker(0, 1) \
+  and vertical41_num_checker(1, 0) \
+  and block22_num_checker(2, 0) \
+  and block22_num_checker(0, 2):
     judge = False
     print(try_count)
   else:
