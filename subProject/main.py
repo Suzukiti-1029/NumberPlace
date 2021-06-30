@@ -48,6 +48,17 @@ def side14_num_checker(W_x_index, W_y_index):
   else:
     return False
 
+def vertical41_num_checker(N_x_index, N_y_index):
+  if grid[N_y_index][N_x_index] != grid[N_y_index + 1][N_x_index] \
+          and grid[N_y_index][N_x_index] != grid[N_y_index + 2][N_x_index] \
+          and grid[N_y_index][N_x_index] != grid[N_y_index + 3][N_x_index] \
+          and grid[N_y_index + 1][N_x_index] != grid[N_y_index + 2][N_x_index] \
+          and grid[N_y_index + 1][N_x_index] != grid[N_y_index + 3][N_x_index] \
+          and grid[N_y_index + 2][N_x_index] != grid[N_y_index + 3][N_x_index]:
+    return True
+  else:
+    return False
+
 number_list = [i for i in range(1, 5)]
 
 for y in range(2):
@@ -57,5 +68,6 @@ for y in range(2):
 
 print(block22_num_checker(0, 0))
 print(side14_num_checker(0, 0))
+print(vertical41_num_checker(0, 0))
 
 root.mainloop()
