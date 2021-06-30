@@ -37,6 +37,17 @@ def block22_num_checker(NW_x_index, NW_y_index):
   else:
     return False
 
+def side14_num_checker(W_x_index, W_y_index):
+  if grid[W_y_index][W_x_index] != grid[W_y_index][W_x_index + 1] \
+  and grid[W_y_index][W_x_index] != grid[W_y_index][W_x_index + 2] \
+  and grid[W_y_index][W_x_index] != grid[W_y_index][W_x_index + 3] \
+  and grid[W_y_index][W_x_index + 1] != grid[W_y_index][W_x_index + 2] \
+  and grid[W_y_index][W_x_index + 1] != grid[W_y_index][W_x_index + 3] \
+  and grid[W_y_index][W_x_index + 2] != grid[W_y_index][W_x_index + 3]:
+    return True
+  else:
+    return False
+
 number_list = [i for i in range(1, 5)]
 
 for y in range(2):
@@ -45,5 +56,6 @@ for y in range(2):
       patch_txt(x, y, number_list.pop(rd.randint(0, len(number_list)-1)))
 
 print(block22_num_checker(0, 0))
+print(side14_num_checker(0, 0))
 
 root.mainloop()
