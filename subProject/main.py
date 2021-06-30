@@ -59,23 +59,29 @@ def vertical41_num_checker(N_x_index, N_y_index):
   else:
     return False
 
-number_list1 = [i for i in range(1, 5)]
-for y in range(2):
-  for x in range(2):
-    patch_txt(x, y, number_list1.pop(rd.randint(0, len(number_list1)-1)))
+judge = True
+try_count = 1
+while judge:
+  try_count += 1
+  number_list1 = [i for i in range(1, 5)]
+  for y in range(2):
+    for x in range(2):
+      patch_txt(x, y, number_list1.pop(rd.randint(0, len(number_list1)-1)))
 
-number_list2 = [i for i in range(1, 5)]
-number_list3 = [i for i in range(1, 5)]
-for [y, x] in [[0, 2], [0, 3], [2, 0], [3, 0]]:
-  if y == 0:
-    patch_txt(x, y, number_list2.pop(rd.randint(0, len(number_list2)-1)))
+  number_list2 = [i for i in range(1, 5)]
+  number_list3 = [i for i in range(1, 5)]
+  for [y, x] in [[0, 2], [0, 3], [2, 0], [3, 0]]:
+    if y == 0:
+      patch_txt(x, y, number_list2.pop(rd.randint(0, len(number_list2)-1)))
+    else:
+      patch_txt(x, y, number_list3.pop(rd.randint(0, len(number_list3)-1)))
+
+  if block22_num_checker(0, 0) \
+  and side14_num_checker(0, 0) \
+  and vertical41_num_checker(0, 0):
+    judge = False
+    print(try_count)
   else:
-    patch_txt(x, y, number_list3.pop(rd.randint(0, len(number_list3)-1)))
-
-print(number_list1, number_list2, number_list3)
-
-print(block22_num_checker(0, 0))
-print(side14_num_checker(0, 0))
-print(vertical41_num_checker(0, 0))
+    grid = [[0 for j in range(4)] for i in range(4)]
 
 root.mainloop()
