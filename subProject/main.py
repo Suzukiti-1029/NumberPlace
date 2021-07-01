@@ -100,6 +100,14 @@ while judge:
   else:
     grid = [[0 for j in range(4)] for i in range(4)]
 
+random_num_list = []
+for i in range(4):
+  for j in range(4):
+    random_num_list.append([i, j])
+for a in range(9):
+  [x, y] = random_num_list.pop(rd.randint(0, len(random_num_list)-1))
+  grid[y][x] = ''
+
 for q in range(4):
   for p in range(4):
     label = tk.Label(root, text=grid[q][p], font=('System', 56))
