@@ -15,4 +15,10 @@ for y in range(3):
         20 + x * 240, 20 + y * 240, 20 + x * 240 + 240, 20 + y * 240 + 240,
         width=3
     )
+
+for q in range(9):
+  for p in range(9):
+    label = tk.Label(root, text=grid[q][p], font=('System', 56))
+    label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
+
 root.mainloop()
