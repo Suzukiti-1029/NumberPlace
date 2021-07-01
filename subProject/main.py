@@ -6,11 +6,6 @@ root.title('2✕2マスの生成')
 cvs = tk.Canvas(width=360, height=360, bg='white')
 cvs.pack()
 
-def patch_txt(p, q, txt):
-  label = tk.Label(root, text=txt, font=('System', 56))
-  label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
-  grid[q][p] = txt
-
 grid = [[0 for j in range(4)] for i in range(4)]
 
 for y in range(4):
@@ -60,32 +55,33 @@ def vertical41_num_checker(N_x_index, N_y_index):
     return False
 
 judge = True
-try_count = 1
+try_count = 0
+
 while judge:
   try_count += 1
   number_list1 = [i for i in range(1, 5)]
   for y in range(2):
     for x in range(2):
-      patch_txt(x, y, number_list1.pop(rd.randint(0, len(number_list1)-1)))
+      grid[y][x] = number_list1.pop(rd.randint(0, len(number_list1)-1))
 
   number_list2 = [i for i in range(1, 5)]
   number_list3 = [i for i in range(1, 5)]
   for [y, x] in [[0, 2], [0, 3], [2, 0], [3, 0]]:
     if y == 0:
-      patch_txt(x, y, number_list2.pop(rd.randint(0, len(number_list2)-1)))
+      grid[y][x] = number_list2.pop(rd.randint(0, len(number_list2)-1))
     else:
-      patch_txt(x, y, number_list3.pop(rd.randint(0, len(number_list3)-1)))
+      grid[y][x] = number_list3.pop(rd.randint(0, len(number_list3)-1))
 
   for [y, x] in [[1, 2], [1, 3], [2, 1], [3, 1]]:
     if y == 1:
-      patch_txt(x, y, number_list2.pop(rd.randint(0, len(number_list2)-1)))
+      grid[y][x] = number_list2.pop(rd.randint(0, len(number_list2)-1))
     else:
-      patch_txt(x, y, number_list3.pop(rd.randint(0, len(number_list3)-1)))
+      grid[y][x] = number_list3.pop(rd.randint(0, len(number_list3)-1))
 
   number_list4 = [i for i in range(1, 5)]
   for y in range(2, 4):
     for x in range(2, 4):
-      patch_txt(x, y, number_list4.pop(rd.randint(0, len(number_list4)-1)))
+      grid[y][x] = number_list4.pop(rd.randint(0, len(number_list4)-1))
 
   if block22_num_checker(0, 0) \
   and block22_num_checker(2, 0) \
@@ -103,5 +99,10 @@ while judge:
     print(try_count)
   else:
     grid = [[0 for j in range(4)] for i in range(4)]
+
+for q in range(4):
+  for p in range(4):
+    label = tk.Label(root, text=grid[q][p], font=('System', 56))
+    label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
 
 root.mainloop()
