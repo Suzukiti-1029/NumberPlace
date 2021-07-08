@@ -18,18 +18,6 @@ for y in range(2):
         20 + x * 160, 20 + y * 160, 20 + x * 160 + 160, 20 + y * 160 + 160,
         width=3
     )
-''' これいらない子。。
-def block22_num_checker(NW_x_index, NW_y_index):
-  for y1 in range(NW_y_index, NW_y_index + 2):
-    for x1 in range(NW_x_index, NW_x_index + 2):
-      for y2 in range(NW_y_index, NW_y_index + 2):
-        for x2 in range(NW_x_index, NW_x_index + 2):
-          if y1 == y2 and x1 == x2:
-            continue
-          if grid[y1][x1] == grid[y2][x2]:
-            return False
-  return True
-'''
 
 def side14_num_checker(W_x_index, W_y_index):
   for x1 in range(W_x_index, W_x_index + 4):
