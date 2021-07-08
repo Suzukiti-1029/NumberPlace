@@ -2,7 +2,7 @@ import tkinter as tk
 import random as rd
 
 root = tk.Tk()
-root.title('2✕2マスの生成')
+root.title('2✕2マスの数独生成')
 cvs = tk.Canvas(width=360, height=360, bg='white')
 cvs.pack()
 
@@ -18,68 +18,68 @@ for y in range(2):
         20 + x * 160, 20 + y * 160, 20 + x * 160 + 160, 20 + y * 160 + 160,
         width=3
     )
-
+''' これいらない子。。
 def block22_num_checker(NW_x_index, NW_y_index):
-  if grid[NW_y_index][NW_x_index] != grid[NW_y_index][NW_x_index + 1] \
-  and grid[NW_y_index][NW_x_index] != grid[NW_y_index + 1][NW_x_index] \
-  and grid[NW_y_index][NW_x_index] != grid[NW_y_index + 1][NW_x_index + 1] \
-  and grid[NW_y_index][NW_x_index + 1] != grid[NW_y_index + 1][NW_x_index] \
-  and grid[NW_y_index][NW_x_index + 1] != grid[NW_y_index + 1][NW_x_index + 1] \
-  and grid[NW_y_index + 1][NW_x_index] != grid[NW_y_index + 1][NW_x_index + 1]:
-    return True
-  else:
-    return False
+  for y1 in range(NW_y_index, NW_y_index + 2):
+    for x1 in range(NW_x_index, NW_x_index + 2):
+      for y2 in range(NW_y_index, NW_y_index + 2):
+        for x2 in range(NW_x_index, NW_x_index + 2):
+          if y1 == y2 and x1 == x2:
+            continue
+          if grid[y1][x1] == grid[y2][x2]:
+            return False
+  return True
+'''
 
 def side14_num_checker(W_x_index, W_y_index):
-  if grid[W_y_index][W_x_index] != grid[W_y_index][W_x_index + 1] \
-  and grid[W_y_index][W_x_index] != grid[W_y_index][W_x_index + 2] \
-  and grid[W_y_index][W_x_index] != grid[W_y_index][W_x_index + 3] \
-  and grid[W_y_index][W_x_index + 1] != grid[W_y_index][W_x_index + 2] \
-  and grid[W_y_index][W_x_index + 1] != grid[W_y_index][W_x_index + 3] \
-  and grid[W_y_index][W_x_index + 2] != grid[W_y_index][W_x_index + 3]:
-    return True
-  else:
-    return False
+  for x1 in range(W_x_index, W_x_index + 4):
+    for x2 in range(W_x_index, W_x_index + 4):
+      if x1 == x2:
+        continue
+      if grid[W_y_index][x1] == grid[W_y_index][x2]:
+        return False
+  return True
 
 def vertical41_num_checker(N_x_index, N_y_index):
-  if grid[N_y_index][N_x_index] != grid[N_y_index + 1][N_x_index] \
-  and grid[N_y_index][N_x_index] != grid[N_y_index + 2][N_x_index] \
-  and grid[N_y_index][N_x_index] != grid[N_y_index + 3][N_x_index] \
-  and grid[N_y_index + 1][N_x_index] != grid[N_y_index + 2][N_x_index] \
-  and grid[N_y_index + 1][N_x_index] != grid[N_y_index + 3][N_x_index] \
-  and grid[N_y_index + 2][N_x_index] != grid[N_y_index + 3][N_x_index]:
-    return True
-  else:
-    return False
+  for y1 in range(N_y_index, N_y_index + 4):
+    for y2 in range(N_y_index, N_y_index + 4):
+      if y1 == y2:
+        continue
+      if grid[y1][N_x_index] == grid[y2][N_x_index]:
+        return False
+  return True
 
 while True:
   number_list1 = [i for i in range(1, 5)]
   for y in range(2):
     for x in range(2):
       grid[y][x] = number_list1.pop(rd.randint(0, len(number_list1)-1))
-  if block22_num_checker(0, 0):
-    number_list2 = [i for i in range(1, 5)]
-    number_list3 = [i for i in range(1, 5)]
-    for [y, x] in [[0, 2], [0, 3], [2, 0], [3, 0]]:
-      if y == 0:
+
+  number_list2 = [i for i in range(1, 5)]
+  number_list3 = [i for i in range(1, 5)]
+  for [y, x] in [[0, 2], [0, 3], [2, 0], [3, 0]]:
+    if y == 0:
+      grid[y][x] = number_list2.pop(rd.randint(0, len(number_list2)-1))
+    else:
+      grid[y][x] = number_list3.pop(rd.randint(0, len(number_list3)-1))
+
+  if side14_num_checker(0, 0) and vertical41_num_checker(0, 0):
+    for [y, x] in [[1, 2], [1, 3], [2, 1], [3, 1]]:
+      if y == 1:
         grid[y][x] = number_list2.pop(rd.randint(0, len(number_list2)-1))
       else:
         grid[y][x] = number_list3.pop(rd.randint(0, len(number_list3)-1))
-    if side14_num_checker(0, 0) and vertical41_num_checker(0, 0):
-      for [y, x] in [[1, 2], [1, 3], [2, 1], [3, 1]]:
-        if y == 1:
-          grid[y][x] = number_list2.pop(rd.randint(0, len(number_list2)-1))
-        else:
-          grid[y][x] = number_list3.pop(rd.randint(0, len(number_list3)-1))
-      if block22_num_checker(2, 0) and block22_num_checker(0, 2) \
-      and side14_num_checker(0, 1) and vertical41_num_checker(1, 0):
-        number_list4 = [i for i in range(1, 5)]
-        for y in range(2, 4):
-          for x in range(2, 4):
-            grid[y][x] = number_list4.pop(rd.randint(0, len(number_list4)-1))
-        if block22_num_checker(2, 2) and side14_num_checker(0, 2) and side14_num_checker(0, 3) \
-        and vertical41_num_checker(2, 0) and vertical41_num_checker(3, 0):
-          break
+
+    if side14_num_checker(0, 1) and vertical41_num_checker(1, 0):
+      number_list4 = [i for i in range(1, 5)]
+      for y in range(2, 4):
+        for x in range(2, 4):
+          grid[y][x] = number_list4.pop(rd.randint(0, len(number_list4)-1))
+
+      if side14_num_checker(0, 2) and side14_num_checker(0, 3) \
+      and vertical41_num_checker(2, 0) and vertical41_num_checker(3, 0):
+        break
+
   grid = [[0 for j in range(4)] for i in range(4)]
 
 random_num_list = []
