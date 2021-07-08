@@ -1,23 +1,28 @@
 import tkinter as tk
 import random as rd
 
-root = tk.Tk()
-root.title('2✕2マスの数独生成')
-cvs = tk.Canvas(width=360, height=360, bg='white')
-cvs.pack()
+
 
 grid = [[0 for j in range(4)] for i in range(4)]
-for y in range(4):
-  for x in range(4):
-    cvs.create_rectangle(
-        20 + x * 80, 20 + y * 80, 20 + x * 80 + 80, 20 + y * 80 + 80
-    )
-for y in range(2):
-  for x in range(2):
-    cvs.create_rectangle(
-        20 + x * 160, 20 + y * 160, 20 + x * 160 + 160, 20 + y * 160 + 160,
-        width = 3
-    )
+def create_grid(grid_step):
+  cvs = tk.Canvas(width=360, height=360, bg='white')
+  cvs.pack()
+  for y in range(grid_step):
+    for x in range(grid_step):
+      cvs.create_rectangle(
+          20 + x * 80, 20 + y * 80, 20 + x * 80 + 80, 20 + y * 80 + 80
+      )
+  grid_big_step = int(grid_step ** 0.5)
+  for y in range(grid_big_step):
+    for x in range(grid_big_step):
+      cvs.create_rectangle(
+          20 + x * 160, 20 + y * 160, 20 + x * 160 + 160, 20 + y * 160 + 160,
+          width = 3
+      )
+  for q in range(grid_step):
+    for p in range(grid_step):
+      label = tk.Label(root, text=grid[q][p], font=('System', 56))
+      label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
 
 def num_checker(index, grid_step):
   # side_checker
@@ -79,9 +84,8 @@ def create_vacant(vacant_numbers, grid_step):
 
 create_vacant(1, 4)
 
-for q in range(4):
-  for p in range(4):
-    label = tk.Label(root, text=grid[q][p], font=('System', 56))
-    label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
+root = tk.Tk()
+root.title('2✕2マスの数独生成')
+create_grid(4)
 
 root.mainloop()
