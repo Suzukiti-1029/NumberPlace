@@ -1,9 +1,32 @@
 import tkinter as tk
 import random as rd
 
+def num_checker(index, grid_step):
+  # side_checker
+  for x1 in range(0, grid_step):
+    for x2 in range(0, grid_step):
+      if x1 == x2:
+        continue
+      if grid[index][x1] == grid[index][x2]:
+        return False
+  # vertical_checker
+  for y1 in range(0, grid_step):
+    for y2 in range(0, grid_step):
+      if y1 == y2:
+        continue
+      if grid[y1][index] == grid[y2][index]:
+        return False
+  return True
 
+def create_vacant(vacant_numbers, grid_step):
+  random_num_list = []
+  for i in range(grid_step):
+    for j in range(grid_step):
+      random_num_list.append([i, j])
+  for n in range(vacant_numbers):
+    [x, y] = random_num_list.pop(rd.randint(0, len(random_num_list)-1))
+    grid[y][x] = ''
 
-grid = [[0 for j in range(4)] for i in range(4)]
 def create_grid(grid_step):
   cvs = tk.Canvas(width=360, height=360, bg='white')
   cvs.pack()
@@ -24,22 +47,7 @@ def create_grid(grid_step):
       label = tk.Label(root, text=grid[q][p], font=('System', 56))
       label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
 
-def num_checker(index, grid_step):
-  # side_checker
-  for x1 in range(0, grid_step):
-    for x2 in range(0, grid_step):
-      if x1 == x2:
-        continue
-      if grid[index][x1] == grid[index][x2]:
-        return False
-  # vertical_checker
-  for y1 in range(0, grid_step):
-    for y2 in range(0, grid_step):
-      if y1 == y2:
-        continue
-      if grid[y1][index] == grid[y2][index]:
-        return False
-  return True
+grid = [[0 for j in range(4)] for i in range(4)]
 
 while True:
   number_list1 = [i for i in range(1, 5)]
@@ -70,22 +78,11 @@ while True:
 
       if num_checker(2, 4) and num_checker(3, 4):
         break
-
   grid = [[0 for j in range(4)] for i in range(4)]
-
-def create_vacant(vacant_numbers, grid_step):
-  random_num_list = []
-  for i in range(grid_step):
-    for j in range(grid_step):
-      random_num_list.append([i, j])
-  for n in range(vacant_numbers):
-    [x, y] = random_num_list.pop(rd.randint(0, len(random_num_list)-1))
-    grid[y][x] = ''
 
 create_vacant(1, 4)
 
 root = tk.Tk()
 root.title('2✕2マスの数独生成')
 create_grid(4)
-
 root.mainloop()
