@@ -16,20 +16,20 @@ for y in range(2):
   for x in range(2):
     cvs.create_rectangle(
         20 + x * 160, 20 + y * 160, 20 + x * 160 + 160, 20 + y * 160 + 160,
-        width=3
+        width = 3
     )
 
-def num_checker(index, grip_step):
+def num_checker(index, grid_step):
   # side_checker
-  for x1 in range(0, grip_step):
-    for x2 in range(0, grip_step):
+  for x1 in range(0, grid_step):
+    for x2 in range(0, grid_step):
       if x1 == x2:
         continue
       if grid[index][x1] == grid[index][x2]:
         return False
   # vertical_checker
-  for y1 in range(0, grip_step):
-    for y2 in range(0, grip_step):
+  for y1 in range(0, grid_step):
+    for y2 in range(0, grid_step):
       if y1 == y2:
         continue
       if grid[y1][index] == grid[y2][index]:
@@ -67,15 +67,18 @@ while True:
         break
 
   grid = [[0 for j in range(4)] for i in range(4)]
-"""
-random_num_list = []
-for i in range(4):
-  for j in range(4):
-    random_num_list.append([i, j])
-for a in range(9):
-  [x, y] = random_num_list.pop(rd.randint(0, len(random_num_list)-1))
-  grid[y][x] = ''
-"""
+
+def create_vacant(vacant_numbers, grid_step):
+  random_num_list = []
+  for i in range(grid_step):
+    for j in range(grid_step):
+      random_num_list.append([i, j])
+  for n in range(vacant_numbers):
+    [x, y] = random_num_list.pop(rd.randint(0, len(random_num_list)-1))
+    grid[y][x] = ''
+
+create_vacant(1, 4)
+
 for q in range(4):
   for p in range(4):
     label = tk.Label(root, text=grid[q][p], font=('System', 56))
