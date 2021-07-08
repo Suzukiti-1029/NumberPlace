@@ -24,28 +24,42 @@ def create_vacant(vacant_numbers, grid_step):
     for j in range(grid_step):
       random_num_list.append([i, j])
   for n in range(vacant_numbers):
-    [x, y] = random_num_list.pop(rd.randint(0, len(random_num_list)-1))
+    [x, y] = random_num_list.pop(rd.randint(0, len(random_num_list) - 1))
     grid[y][x] = ''
 
 def create_grid(grid_step):
-  cvs = tk.Canvas(width=360, height=360, bg='white')
+  cvs = tk.Canvas(
+    width = 40 + grid_step * 80,
+    height = 40 + grid_step * 80,
+    bg='white'
+  )
   cvs.pack()
   for y in range(grid_step):
     for x in range(grid_step):
       cvs.create_rectangle(
-          20 + x * 80, 20 + y * 80, 20 + x * 80 + 80, 20 + y * 80 + 80
+        20 + x * 80,
+        20 + y * 80,
+        20 + (x + 1) * 80,
+        20 + (y + 1) * 80
       )
   grid_big_step = int(grid_step ** 0.5)
   for y in range(grid_big_step):
     for x in range(grid_big_step):
       cvs.create_rectangle(
-          20 + x * 160, 20 + y * 160, 20 + x * 160 + 160, 20 + y * 160 + 160,
-          width = 3
+        20 + x * 80 * grid_big_step,
+        20 + y * 80 * grid_big_step,
+        20 + (x + 1) * 80 * grid_big_step,
+        20 + (y + 1) * 80 * grid_big_step,
+        width = 3
       )
   for q in range(grid_step):
     for p in range(grid_step):
       label = tk.Label(root, text=grid[q][p], font=('System', 56))
-      label.place(x=20 + p * 80 + 40, y=20 + q * 80 + 40, anchor=tk.CENTER)
+      label.place(
+        x = 20 + p * 80 + 40,
+        y = 20 + q * 80 + 40,
+        anchor = tk.CENTER
+      )
 
 grid = [[0 for j in range(4)] for i in range(4)]
 
